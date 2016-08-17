@@ -6,6 +6,10 @@ output "node.1.ip" {
   value = "${aws_instance.node.1.private_ip}"
 }
 
+output "node.2.ip" {
+  value = "${aws_instance.node.2.private_ip}"
+}
+
 output "nat.ip" {
   value = "${aws_instance.nat.public_ip}"
 }
