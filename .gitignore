@@ -2,4 +2,4 @@
 *.tfstate.backup
 terraform.tfvars
 ssh/
-*.save
+*.tf.save
