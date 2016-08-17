@@ -9,4 +9,5 @@ ssh-keygen -t rsa -C "deployer" -P '' -f ssh/deployer
 access_key = "your_key"
 secret_key = "your_secret"
 ```
-4. terraform apply
+4. Change the password for HTTP access in **cloud-config/nodes.yml**. Default is test/test.
+5. terraform apply 
