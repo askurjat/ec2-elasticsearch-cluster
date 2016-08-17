@@ -17,7 +17,7 @@ resource "aws_elb" "node" {
   subnets = ["${aws_subnet.public.id}"]
   security_groups = ["${aws_security_group.default.id}", "${aws_security_group.elastics.id}"]
   listener {
-    instance_port = 9200
+    instance_port = 8080
     instance_protocol = "http"
     lb_port = 9200
     lb_protocol = "http"
