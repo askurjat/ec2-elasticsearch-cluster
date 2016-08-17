@@ -7,4 +7,4 @@ runcmd:
   # Download Docker image
   - sudo docker pull elasticsearch
   # Run Docker images
-  - sudo docker run -p 9200:9200 -d elasticsearch -Dscript.disable_dynamic=false
+  - sudo docker run -p 9200:9200 -d elasticsearch
