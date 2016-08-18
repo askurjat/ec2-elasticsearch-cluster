@@ -2,6 +2,7 @@
 
 packages:
   - nginx
+  - openjdk-7-jre
 
 write_files:
   - path: /etc/nginx/nginx.conf
@@ -50,11 +51,24 @@ write_files:
   - path: /etc/nginx/passwords
     content: | 
       test:$apr1$ClN2xdA3$AtJ0Yifq0Y.sGF42GDmUv1
+  - path: /etc/cloud-init.sh
+    content: |
+      #!/bin/bash
+      wget https://download.elastic.co/elasticsearch/release/org/elasticsearch/distribution/deb/elasticsearch/2.3.5/elasticsearch-2.3.5.deb -P /tmp/ 
+      dpkg -i /tmp/elasticsearch-2.3.5.deb 
+      update-rc.d elasticsearch defaults
+      /usr/share/elasticsearch/bin/plugin install cloud-aws -b
+      echo 'cloud.aws.access_key: AKIAIX5ODQQLTEZEGCAA' | tee --append /etc/elasticsearch/elasticsearch.yml
+      echo 'cloud.aws.secret_key: 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' | tee --append /etc/elasticsearch/elasticsearch.yml 
+      echo 'cluster.name: artirix' | tee --append /etc/elasticsearch/elasticsearch.yml 
+      echo 'http.port: 9200' | tee --append /etc/elasticsearch/elasticsearch.yml
+      echo 'cloud.aws.protocol: http' | tee --append /etc/elasticsearch/elasticsearch.yml
+      echo 'cloud.aws.region: eu-west-1' | tee --append /etc/elasticsearch/elasticsearch.yml
+      echo 'discovery.type: ec2' | tee --append /etc/elasticsearch/elasticsearch.yml
+      echo 'network.host: [ "_site_", "_local_" ]' | tee --append /etc/elasticsearch/elasticsearch.yml
+      service elasticsearch start    
       
 runcmd:
-  # Install docker
-  - curl -sSL https://get.docker.com/ | sudo sh
-  # Download Docker image
-  - sudo docker pull elasticsearch
-  # Run Docker images
-  - sudo docker run -p 9200:9200 -d elasticsearch -Dcluster.name="artirix"
+  # Install ElasticSearch  
+  - chmod +x /etc/cloud-init.sh
+  - sh /etc/cloud-init.sh
