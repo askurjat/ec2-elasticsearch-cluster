@@ -58,8 +58,8 @@ write_files:
       dpkg -i /tmp/elasticsearch-2.3.5.deb 
       update-rc.d elasticsearch defaults
       /usr/share/elasticsearch/bin/plugin install cloud-aws -b
-      echo 'cloud.aws.access_key: AKIAIX5ODQQLTEZEGCAA' | tee --append /etc/elasticsearch/elasticsearch.yml
-      echo 'cloud.aws.secret_key: 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' | tee --append /etc/elasticsearch/elasticsearch.yml 
+      echo 'cloud.aws.access_key: <>' | tee --append /etc/elasticsearch/elasticsearch.yml
+      echo 'cloud.aws.secret_key: <>' | tee --append /etc/elasticsearch/elasticsearch.yml 
       echo 'cluster.name: artirix' | tee --append /etc/elasticsearch/elasticsearch.yml 
       echo 'http.port: 9200' | tee --append /etc/elasticsearch/elasticsearch.yml
       echo 'cloud.aws.protocol: http' | tee --append /etc/elasticsearch/elasticsearch.yml
